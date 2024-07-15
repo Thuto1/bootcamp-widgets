@@ -1,0 +1,14 @@
+
+    body {
+        background-color: beige;
+    }
+    .form-group {
+        display: block;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .form-group input, .form-group select {
+        flex: 1;
+    }
+

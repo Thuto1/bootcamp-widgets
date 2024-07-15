@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greeting Widget</title>
+    <link rel="stylesheet" href="greet.css">
+    <link rel="stylesheet" href="fruits.css">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    <script src="greetingWidget.js" defer></script>
+</head>
+<body>
+
+  <h1 class="bootcamp">BOOTCAMP FUNCTIONS WIDGETS</h1>
+  <BR></BR>
+  <h1>Greeting widget</h1>
+    <div x-data="greetingWidget()" class="p-4">
+        <div class="form-group">
+            <label for="name" class="block text-sm font-medium text-gray-700">Name:</label>
+            <input id="name" type="text" x-model="name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+
+        <div class="mt-4">
+            <label for="language" class="block text-sm font-medium text-gray-700">Language:</label>
+            <select id="language" x-model="language" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md">
+                <option value="sepedi">Sepedi</option>
+                <option value="english">English</option>
+                <option value="french">French</option>
+                <option value="german">German</option>
+            </select>
+        </div>
+
+        <div class="mt-4">
+            <button @click="greet" class="px-4 py-2 bg-blue-600 text-white rounded-md">Greet</button>
+        </div>
+
+        <div class="mt-4">
+            <p x-text="message" class="text-lg font-semibold"></p>
+        </div>
+    </div>
+
+<!-- this a code for the remaining airtime -->
+<br>
+<h1>Airtime widget</h1>
+<div x-data="airtimeWidget()" class="p-4">
+  <div class="form-group">
+      <label for="usage" class="text-sm font-medium text-gray-700">Projected Usage (in minutes):</label>
+      <input id="usage" type="text" x-model="usage" class="mt-1 block px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+  </div>
+<br>
+  <div class="form-group">
+      <label for="airtime" class="text-sm font-medium text-gray-700">Available Airtime (in minutes):</label>
+      <input id="airtime" type="text" x-model="airtime" class="mt-1 block px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+  </div>
+
+  <div class="mt-4">
+      <button @click="calculateRemainingAirtime" class="px-4 py-2 bg-blue-600 text-white rounded-md">Calculate</button>
+  </div>
+
+  <div class="mt-4">
+      <p x-text="result" class="text-lg font-semibold"></p>
+  </div>
+</div>
+
+
+<!-- Fruits widgets -->
+<br>
+<div x-data="fruitWidget()" class="p-4">
+  <h2 class="text-xl font-semibold mb-4">Fruit Filtering</h2>
+
+  <div class="mt-4">
+      <button @click="showOver20" class="px-4 py-2 bg-blue-600 text-white rounded-md mr-4">Over $20</button>
+      <button @click="showUnder20" class="px-4 py-2 bg-green-600 text-white rounded-md">Under $20</button>
+  </div>
+
+  <h2 class="text-xl font-semibold mt-8 mb-4">Filtered Fruits</h2>
+
+  <div class="mt-4">
+      <ul x-show="filteredFruits.length > 0" class="list-disc pl-6">
+          <template x-for="fruit in filteredFruits" :key="fruit.id">
+              <li x-text="fruit.name + ' - $' + fruit.price"></li>
+          </template>
+      </ul>
+      <p x-show="filteredFruits.length === 0 && showMessage" class="text-gray-500">No fruits found.</p>
+  </div>
+</div>
+
+
+<!-- this is the transport fees -->
+
+<div x-data="transportWidget()" class="p-4">
+  <h2 class="text-xl font-semibold mb-4">Transport Fee Calculator</h2>
+
+  <div class="mt-4">
+      <label class="block text-sm font-medium text-gray-700">Select Shift:</label>
+      <div class="mt-1">
+          <label class="inline-flex items-center">
+              <input type="radio" x-model="selectedShift" value="morning" class="form-radio">
+              <span class="ml-2">Morning Shift</span>
+          </label>
+          <label class="inline-flex items-center ml-4">
+              <input type="radio" x-model="selectedShift" value="afternoon" class="form-radio">
+              <span class="ml-2">Afternoon Shift</span>
+          </label>
+          <label class="inline-flex items-center ml-4">
+              <input type="radio" x-model="selectedShift" value="night" class="form-radio">
+              <span class="ml-2">Night Shift</span>
+          </label>
+      </div>
+  </div>
+
+  <div class="mt-4" x-show="selectedShift">
+      <p class="text-lg font-semibold" x-text="calculateTransportFee()"></p>
+  </div>
+</div>
+
+
+    <!-- this is linking of the javascripts function -->
+    <script src="greetingWidget.js"></script>
+    <script src="airtimeWidget.js"></script>
+    <script src="fruitWidget.js"></script>
+    <script src="transportWidget.js"></script>
+</body>
+</html>
